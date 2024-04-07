@@ -17,6 +17,34 @@ $A$ is the action set(multiset), and the action space is $\{a_1, \ldots, a_K\}$
 $R$ each level corresponds to one $R_i(r|a)$
 $target:\max\sum_{t=1}^Tr_t,\ s.t.\ r_t\thicksim R(\cdot|a_t)$
 
+#### cumulative regret
+For each action $a$, define expected reward as $Q(a)=\Bbb{E}_{r\thicksim R(\cdot|a)}[r]$. Therefore, $\exist Q^* = \max_{a\isin A}Q(a)$. Intuitively, the regret of the action $R(a) = Q^* - Q(a)$, and cumulative regret, for next complete T steps, is $\sigma_R = \sum_{t=1}^TR(a_t)$.
+
+Further, the inference below allow us to dynamically renew expected rewards:
+$$\begin{split}Q_k&=\frac{1}{k}\sum\limits_{i=1}^{k}r_i\\
+      &=\frac{1}{k}\sum\limits_{i=1}^{k-1}r_i+\frac{r_k}{k}\\
+      &=\frac{k-1}{k}(\frac{1}{k-1}\sum\limits_{i=1}^{k-1}r_i)+\frac{r_k}{k}\\
+      &=\frac{k-1}{k}Q_{k-1}+\frac{r_k}{k}\\
+      &=Q_{k-1}-\frac{1}{k}Q_{k-1}+\frac{r_k}{k}\\
+      &=Q_{k-1}+\frac{r_k-Q_{k-1}}{k}\\
+\end{split}$$
+
+For each lever, only if we use a counter $N(a)$, updates of $\^Q(a_t)$ could be descripted as:
+- for $\forall a \isin A,\ init.\ N(a) = \^Q(a) = 0$
+- for $t = 1 \to T$ do
+    - choose lever $a_t$
+    - get $r_t$
+    - update counter: $N(a_t) = N(a_t) + 1$
+    - update expected rewards: $\^Q(a_t)=\^Q(a_t)+\frac{1}{N(a_t)}[r_t-\^Q(a_t)]$
+    - end for
+
+#### $\epsilon$-Greedy algo.
+
+Optimize the lever choosing strategy, balancing exploration and exploitation. The choosing strategy is:
+$$a_t = \left\{\begin{aligned}\arg \max_{a\isin A}\^Q(a), with\ prob.\ 1-\epsilon\\random\ sample\ from\ A, with\ prob.\ \epsilon\\\end{aligned}\right.$$
+
+If set $\epsilon$ as a constant, the cumulative regret will linearly increase. But if set $\epsilon = \frac{1}{t}$, it will be sublinear and obviously better than constant form.
+
 ### two types of RL
 
 #### model-based reinforcement learning

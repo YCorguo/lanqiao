@@ -9,19 +9,27 @@ $$
    a_2 & \text{\_} \\
    a^2 & (shift+6) \\
    \ldots & \text{ldots} \\
+   \exist & exist \\
+   \isin & isin \\
+   \forall & forall \\
+   \to & to \\
    \hline
    operators \\
    \thicksim & \text{thicksim} \\
    \frac{1}{1} & \text{frac} \\
    \le & \text{le} \\
    \hline
-   alpha \\
+   alphas \\
    \nu & \text{nu} \\ 
    \Bbb{E} & \text{Bbb} \\
    \pi & \text{pi} \\
    \delta & \text{delta} \\
+   \epsilon & epsilon \\
+   \hline
+   formats \\
    ROC\ Curve = \left\{\begin{aligned}x: FPR \\y: TPR \\\end{aligned}\right. & left\ begin\ aligned\ x: FPR\ y: TPR\ end\ aligned\ right.\\
-\end{matrix}
+   \begin{split}a&=b+c\\&=e+f\end{split} & begin\ split\ \&\ end
+   \end{matrix}
 $$
 
 ## python
