@@ -61,7 +61,23 @@ y: TPR \\
 \end{aligned}
 \right.
 $$
-
+$$LogLoss = -1.0\times(target\times log(prediction)+(1-target)\times log(1-prediction))$$
+$$Macro\ averaged\ precision = \frac{\sum\limits_i Precision_i\times N_i}{\sum\limits_i N_i}$$
+$$Micro\ averaged\ precision = \frac{Precision_i}{N_i}$$
+$$Weighted\ averaged\ precision = \frac{\sum\limits_i Precision_i\times N_i\times w_i}{\sum\limits_i N_i}$$
+$$Confusion\ Matrix:
+\begin{matrix} 
+\ & class-1 & class-0 \\
+class-1 & xx & xx \\
+class-0 & xx & xx \\
+\end{matrix}$$
+$$Error=True Value−Predicted Value$$
+$$Absolute Error=Abs(True Value−Predicted Value)$$
+$$Squared Error=(TrueValue−Predicted Value)^2$$
+$$RMSE=SQRT(MSE)$$
+$$Percentage Error=\frac{True Value–Predicted Value}{True Value}\times100$$
+$$Coefficient\ of\ determination = R^2 = \frac{\sum_{i=1}^N(y_{t_i}-y_{p_i})^2}{\sum_{i=1}^{N}(y_{t_i}-y_{t_{mean}})}$$
+$$MCC=\frac{TP\times TN−FP\times FN}{\sqrt{(TP+FP)\times(FN+TN)\times(FP+TN)\times(TP+FN)}}$$
 ## references
 
 [动手学强化学习](https://hrl.boyuai.com/)
