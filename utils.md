@@ -19,7 +19,8 @@ $$
    \nu & \text{nu} \\ 
    \Bbb{E} & \text{Bbb} \\
    \pi & \text{pi} \\
-   \delta & \text{delta}
+   \delta & \text{delta} \\
+   ROC\ Curve = \left\{\begin{aligned}x: FPR \\y: TPR \\\end{aligned}\right. & left\ begin\ aligned\ x: FPR\ y: TPR\ end\ aligned\ right.\\
 \end{matrix}
 $$
 

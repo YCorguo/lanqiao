@@ -48,6 +48,42 @@ Simply split dataset as train set and test set.
     a. for N samples, use N-1 to train, 1 for evaluate.
 4. Usually, if the size is large, simply split it into 10 or 20 parts, else use Sturge's Rule:$$Number\ of\ Bins=1+log_2(N)$$
 
+### Measurements
+$$Accuracy = \frac{TP+TN}{TP+TN+FP+FN}$$
+$$Precision = \frac{TP}{TP+FP}$$
+$$Recall = TPR = \frac{TP}{TP+FN}$$
+$$FPR = \frac{FP}{TN+FP}$$
+$$F1 = \frac{2*Precision*Recall}{Precision+Recall}$$
+$$ROC\ Curve = \left\{
+\begin{aligned}
+x: FPR \\
+y: TPR \\
+\end{aligned}
+\right.
+$$
+
 ## references
 
 [动手学强化学习](https://hrl.boyuai.com/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
