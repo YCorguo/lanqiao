@@ -35,7 +35,18 @@ $$\max\limits_\theta \Bbb{E}_{s\thicksim\nu^{\pi_{\theta_k}}}\Bbb{E}_{a\thicksim
 s.t.\ \Bbb{E}_{s\thicksim\nu^{\pi_{\theta_k}}}[D_{KL}(\pi_{\theta_k}(\cdot|s), \pi_\theta(\cdot|s))]\le\delta
 $$
 
+## Fundamental
 
+### Cross Validation
+1. Simple Cross Validation.
+Simply split dataset as train set and test set.
+2. K-fold Cross Validation
+    a. split
+    b. enumerate each subset as validset.
+    c. use mean value of K times.
+3. Leave-one-out Cross Validation
+    a. for N samples, use N-1 to train, 1 for evaluate.
+4. Usually, if the size is large, simply split it into 10 or 20 parts, else use Sturge's Rule:$$Number\ of\ Bins=1+log_2(N)$$
 
 ## references
 
