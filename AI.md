@@ -57,12 +57,18 @@ when $N_t$ increases, $p$ is decreases. so $Q_t(a) = \^Q_t(a)+\^U_t(a)$, and $\^
 
 Using $\epsilon$-greedy algo., we could set $p = \epsilon = \frac{1}{t}$, and because $p = e^{-2N_t(a)U_t(a)^2}$, get $\^U_t(a) = \sqrt{\frac{-\log p}{2N_t(a)}}$, and of course, for robustness, $\^U_t(a) = \sqrt{\frac{-\log p}{2(N_t(a)+1)}}$.
 
-At last, we could set a coefficent $c$ to control the weight of uncertainty: $$a = \arg \max _{a \isin A} [\^Q_t(a)+c \cdot \^U_t(a)]$$.
+At last, we could set a coefficent $c$ to control the weight of uncertainty: $$a = \arg \max _{a \isin A} [\^Q_t(a)+c \cdot \^U_t(a)]$$
 
 #### Thompson Sampling
 1. assume that each lever corresponds to one specific distribution.
 2. sample on each lever to estimate the specific distribution.
 3. choose the action of largest reward.
+
+### Markov decision process
+#### Stochastic Process
+Stochastic Process describe the variance of random variables according to time. 
+#### Markov Property
+If one stochastic process is with Markov property, the state of time t+1 depends merely on the state of time t. Formatly:$$P(S_{t+1}|S_t) = P(S_{t+1}|S_1, \ldots, S_t)$$
 
 ### two types of RL
 
