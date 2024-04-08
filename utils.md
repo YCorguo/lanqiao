@@ -13,6 +13,8 @@ $$
    \isin & isin \\
    \forall & forall \\
    \to & to \\
+   \overline x & overline \\
+   \^x & (shift+6) \\
    \hline
    operators \\
    \thicksim & \text{thicksim} \\

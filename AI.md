@@ -45,6 +45,25 @@ $$a_t = \left\{\begin{aligned}\arg \max_{a\isin A}\^Q(a), with\ prob.\ 1-\epsilo
 
 If set $\epsilon$ as a constant, the cumulative regret will linearly increase. But if set $\epsilon = \frac{1}{t}$, it will be sublinear and obviously better than constant form.
 
+#### Upper Confidence Bound algo.
+##### Hoeffding's inequality
+Given n i.i.d random variables $X_1, X_2, \ldots, X_n$, with a range of $[0, 1]$, experience expectations is $\overline x_n = \frac{1}{n}\sum_{j=1}^nX_j$, then$$\Bbb{P}\{\Bbb E[X]\ge\overline x_n+u\}\le e^{-2nu^2}$$
+
+##### UCB in MAB for each lever
+let $\overline x_t = \^Q_t(a), u = \^U_t(a), p = e^{-2N_t(a)U_t(a)^2}$, then $$\Bbb{P}\{Q_t(a)\ge\^Q_t(a)+\^U_t(a)\}\le e^{-2n\^U^2_t(a)} = p$$
+$$1-\Bbb{P}\{Q_t(a)\ge\^Q_t(a)+\^U_t(a)\}\ge 1-p$$
+$$\Bbb{P}\{Q_t(a)<\^Q_t(a)+\^U_t(a)\}\ge 1- p$$
+when $N_t$ increases, $p$ is decreases. so $Q_t(a) = \^Q_t(a)+\^U_t(a)$, and $\^Q_t(a)+\^U_t(a)$ is expected reward upper bound. Now, we can choose the action with the reward expectation with largest upper bound.
+
+Using $\epsilon$-greedy algo., we could set $p = \epsilon = \frac{1}{t}$, and because $p = e^{-2N_t(a)U_t(a)^2}$, get $\^U_t(a) = \sqrt{\frac{-\log p}{2N_t(a)}}$, and of course, for robustness, $\^U_t(a) = \sqrt{\frac{-\log p}{2(N_t(a)+1)}}$.
+
+At last, we could set a coefficent $c$ to control the weight of uncertainty: $$a = \arg \max _{a \isin A} [\^Q_t(a)+c \cdot \^U_t(a)]$$.
+
+#### Thompson Sampling
+1. assume that each lever corresponds to one specific distribution.
+2. sample on each lever to estimate the specific distribution.
+3. choose the action of largest reward.
+
 ### two types of RL
 
 #### model-based reinforcement learning
