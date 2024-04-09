@@ -43,6 +43,30 @@ Laplace smoothing adjusts this formula by adding one to the count of all n-grams
 #### Rise of Pre-trained Models: BERT and GPT
 - **2018**: BERT (Bidirectional Encoder Representations from Transformers). It can understand the context of a word in different uses, significantly improving performance on language understanding tasks.
 - **2018**: OpenAI released the GPT (Generative Pre-trained Transformer) model, utilizing the Transformer architecture for large-scale text data pre-training, followed by fine-tuning on specific tasks. The GPT model achieved breakthrough progress in various language generation tasks.
+##### Differences between RNN, BERT and GPT
+###### RNN (Recurrent Neural Network)
+- **Mechanism**: RNNs process sequences by maintaining a 'memory' (hidden state) of previous inputs using a loop mechanism. This allows them to transfer information from one step of the sequence to the next.
+- **Formula**:
+  \[ h_t = f(W_{hh}h_{t-1} + W_{xh}x_t) \]
+  Where \(h_t\) is the hidden state at time \(t\), \(x_t\) is the input at time \(t\), \(W_{hh}\) and \(W_{xh}\) are weights, and \(f\) is a non-linear activation function like tanh or ReLU.
+- **Limitation**: RNNs struggle with long-term dependencies due to vanishing and exploding gradient problems.
+
+###### BERT (Bidirectional Encoder Representations from Transformers)
+- **Mechanism**: BERT uses the Transformer architecture, specifically focusing on the encoder part. It processes entire input sequences simultaneously, allowing it to capture bidirectional contexts by using self-attention mechanisms. BERT is pre-trained on large corpora using tasks like Masked Language Model (MLM) and Next Sentence Prediction (NSP).
+- **Formula**:
+  The core of BERT's mechanism is the self-attention calculation:
+  \[ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \]
+  Where \(Q\), \(K\), and \(V\) are queries, keys, and values matrices derived from input embeddings, \(d_k\) is the dimensionality of the keys, and softmax provides a probability distribution used to weight the values.
+- **Distinctive Feature**: BERT's bidirectional training is more comprehensive than traditional left-to-right or right-to-left models, allowing it to understand the context better.
+
+###### GPT (Generative Pre-trained Transformer)
+- **Mechanism**: GPT also uses the Transformer architecture but focuses on the decoder. It's trained on a predictive task to generate the next word in a sentence. GPT processes text in a unidirectional (left-to-right) manner but can be adapted for bidirectional contexts in subsequent versions (e.g., GPT-3).
+- **Formula**:
+  Similar to BERT, GPT relies on the self-attention mechanism, but its training objective and structure are geared towards generation:
+  \[ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \]
+  The difference lies in the application of this formula; GPT uses it in a generative context to predict the next token.
+- **Distinctive Feature**: GPT is designed for generative tasks and is trained using a causal (autoregressive) language modeling task, predicting each word based on the previous words in a sentence.
+
 #### Scaling Model Sizes
 - **2019 to present**: With increased computational power and larger datasets, the size of language models continued to expand. Models like GPT-2 and GPT-3, with billions to hundreds of billions of parameters, further improved the quality and diversity of generated text.
 
