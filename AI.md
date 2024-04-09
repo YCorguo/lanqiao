@@ -6,6 +6,32 @@
 #### Early Stages: Rule-based and Statistical Models
 - **1950s-1980s**: primarily rule-based. relied on expert systems and hardcoded linguistic rules to parse text, with limited effectiveness.
 - **1980s-1990s**: Statistical models, notably n-gram models. but still limited to relatively small datasets and simpler tasks.
+An n-gram is a contiguous sequence of n items from a given sample of text or speech. The items can be phonemes, syllables, letters, words, or base pairs according to the application. N-grams are used for a variety of purposes in statistical natural language processing and genetic sequence analysis. They serve as the foundation for models that represent the probability of a given sequence of elements.
+##### N-gram model
+N-gram essentially refers to a set of co-occurring words or characters within a given text. For example:
+- A 1-gram (or unigram) is a single unit.
+- A 2-gram (or bigram) is a sequence of two units.
+- Similarly, a 3-gram (or trigram) consists of three units, and so on.
+
+An n-gram model predicts the probability of a word given the previous \(n-1\) words, making it a type of Markov model that assumes the probability of a word depends only on the previous \(n-1\) words. This simplification makes the model tractable and computationally efficient, but it also means that accuracy may decrease with increasing \(n\), as the specific sequence of \(n-1\) words becomes rare or unseen in the training data.
+
+###### Limitations
+- **Sparsity**: As \(n\) increases, the frequency of encountering the exact sequence in the training corpus decreases, leading to sparse data issues.
+- **Storage**: Larger \(n\)-grams require significantly more memory and storage, as the number of possible combinations increases exponentially.
+- **Generalization**: High-order n-grams may overfit the training data, leading to poor generalization on unseen text.
+
+###### Smoothing Techniques
+To address the sparsity problem, smoothing techniques like Laplace smoothing (add-one smoothing) and interpolation are used. These methods adjust the probability distribution to account for unseen n-grams, making the model more robust and less likely to assign zero probability to unseen events.
+
+1. Laplace Smoothing in N-gram model
+The basic idea behind Laplace smoothing is to assume that every n-gram has been seen at least once before, by adding a small positive value (typically 1) to the count of every n-gram in the corpus, including those not present in the training set.
+
+    1. How Laplace Smoothing Works
+Given an n-gram model, the probability of the next word \(w_n\) given the previous \(n-1\) words (context \(w_{1}^{n-1}\)) can be computed as:
+\[ P(w_n | w_{1}^{n-1}) = \frac{C(w_{1}^{n})}{C(w_{1}^{n-1})} \]
+where \(C(w_{1}^{n})\) is the count of the n-gram \(w_{1}^{n}\) in the training corpus, and \(C(w_{1}^{n-1})\) is the count of the \(n-1\) words occurring together in the training corpus. Without smoothing, if an n-gram \(w_{1}^{n}\) was not present in the training data, \(C(w_{1}^{n}) = 0\), leading to \(P(w_n | w_{1}^{n-1}) = 0\).
+Laplace smoothing adjusts this formula by adding one to the count of all n-grams: \[ P_{\text{Laplace}}(w_n | w_{1}^{n-1}) = \frac{C(w_{1}^{n}) + 1}{C(w_{1}^{n-1}) + V} \] where \(V\) is the number of unique words in the vocabulary. This adjustment ensures that no n-gram has a zero probability.
+
 #### Neural Networks and Word Embeddings
 - **Early 2000s**: neural networks. moving away from reliance on manually designed features.
 - **2013**: Word2Vec marked the rise of word embedding techniques.
