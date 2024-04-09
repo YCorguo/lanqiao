@@ -13,6 +13,10 @@ N-gram essentially refers to a set of co-occurring words or characters within a 
 - A 2-gram (or bigram) is a sequence of two units.
 - Similarly, a 3-gram (or trigram) consists of three units, and so on.
 
+N-gram granularity:
+- Character granularity
+- Word granularity
+
 An n-gram model predicts the probability of a word given the previous \(n-1\) words, making it a type of Markov model that assumes the probability of a word depends only on the previous \(n-1\) words. This simplification makes the model tractable and computationally efficient, but it also means that accuracy may decrease with increasing \(n\), as the specific sequence of \(n-1\) words becomes rare or unseen in the training data.
 
 ###### Limitations
@@ -35,6 +39,29 @@ Laplace smoothing adjusts this formula by adding one to the count of all n-grams
 #### Neural Networks and Word Embeddings
 - **Early 2000s**: neural networks. moving away from reliance on manually designed features.
 - **2013**: Word2Vec marked the rise of word embedding techniques.
+
+##### Word2Vec
+###### Encoding Methods
+- **One-hot Encoding**: This technique involves representing each word as a vector.
+- **Distributed Representation**: Words are represented in a way that captures more nuanced information, including similarities and relationships with other words.
+###### Continuous Bag Of Words (CBOW)
+This model works on the principle of predicting a word based on its context. Here's how it operates:
+
+1. **Word2Vec**: It's a technique that transforms words into vectors, allowing us to perform mathematical operations on words.
+2. **Context Processing**: It looks at the surrounding words (context) and either sums them up or averages them. The specific positions of the words in the context are not taken into account.
+3. **Prediction Mechanism**: Using the context, the model tries to predict the target word. This is usually done through a simple linear layer in the neural network.
+
+###### Skip-Gram
+The Skip-Gram model essentially works in the opposite direction of CBOW:
+
+1. **Forward Pass**: (Description of the process shown in an image was provided.)![alt text](image-1.png)
+2. **Prediction Goal**: Here, a given word is used to predict the words surrounding it (its context).
+3. **Error Calculation**: The error is calculated as the sum of the errors for each word in the context.
+4. **Optimization Techniques**:
+- Subsampling: This involves randomly removing words that don't provide much value (like "the", "is", etc.) based on a certain probability.
+- Negative Sampling: During the update phase, adjustments are made only for the correctly predicted position (positive sample) and a few randomly chosen incorrect positions (negative samples).
+- Hierarchical Softmax: This is a more efficient way of performing softmax using a Huffman tree structure, combined with logistic regression.
+
 #### Recurrent Neural Networks (RNN) and Long Short-Term Memory (LSTM)
 - **Early 2010s**: RNN and LSTMs, began to be widely used for processing sequential data, including text. These models were capable of capturing long-distance dependencies within sequences, though training them was still challenging due to issues like vanishing and exploding gradients.
 #### Attention Mechanism and Transformers
