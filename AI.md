@@ -94,10 +94,31 @@ BERT (Bidirectional Encoder Representations from Transformers) has inspired a mu
 - **Improvements**: Focuses on compressing BERT to make it suitable for deploying on devices with limited computational capacity. It employs a two-stage learning process including transformer distillation and data augmentation.
 - **Performance**: Despite its smaller size, TinyBERT achieves performance close to its full-sized counterpart on general language understanding tasks.
 
-### Comparative Analysis
+###### Comparative Analysis
 - **Size and Efficiency**: ALBERT and TinyBERT significantly reduce model size and computational requirements, making BERT more accessible for resource-constrained environments.
 - **Performance**: RoBERTa and SpanBERT focus on enhancing the model's understanding of context and relationships within text, showing notable performance improvements on several benchmarks.
 - **Specialization**: ERNIE incorporates external knowledge into pre-training, providing advantages in tasks that benefit from such information, especially in domain-specific applications.
+
+##### GPT History (Generative Pre-trained Transformer)
+###### GPT (Generative Pre-trained Transformer)
+- **Release Date**: 2018
+- **Features**: The first version introduced by OpenAI, GPT utilizes the Transformer architecture's decoder component and follows a pre-training plus fine-tuning paradigm. With 117 million parameters, GPT was pre-trained in an unsupervised manner on a large dataset and then fine-tuned for specific tasks.
+- **Applications**: Even as an early model, GPT demonstrated potential across a range of NLP tasks including text generation, translation, and summarization.
+
+###### GPT-2
+- **Release Date**: 2019
+- **Features**: GPT-2 expanded the scale of GPT to 1.5 billion parameters. It was pre-trained on a larger dataset, showcasing more refined text generation capabilities, including better coherence and understanding of text.
+- **Applications**: GPT-2 made breakthroughs in creative writing, news article generation, and dialogue systems, among other areas.
+
+###### GPT-3
+- **Release Date**: 2020
+- **Features**: GPT-3 further enlarged the model to 175 billion parameters, making it one of the largest language models of its time. Its innovation lies in its few-shot learning ability, where it can perform a variety of NLP tasks with little to no task-specific data, using just a few examples.
+- **Applications**: The applications of GPT-3 are exceedingly broad, ranging from generating programming code and automatic text summarization to language translation and advanced dialogue systems.
+
+###### Instruct GPT
+- **Release Date**: 2021
+- **Features**: Instruct GPT (also referred to as GPT-3.5) is an optimized version of GPT-3 that further learns from human feedback. It better understands user instructions, generating outputs more aligned with human intentions.
+- **Applications**: Instruct GPT shows significant improvements in providing more accurate information, writing high-quality texts, and answering complex questions.
 
 #### Scaling Model Sizes
 - **2019 to present**: With increased computational power and larger datasets, the size of language models continued to expand. Models like GPT-2 and GPT-3, with billions to hundreds of billions of parameters, further improved the quality and diversity of generated text.
