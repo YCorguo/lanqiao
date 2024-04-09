@@ -120,6 +120,31 @@ BERT (Bidirectional Encoder Representations from Transformers) has inspired a mu
 - **Features**: Instruct GPT (also referred to as GPT-3.5) is an optimized version of GPT-3 that further learns from human feedback. It better understands user instructions, generating outputs more aligned with human intentions.
 - **Applications**: Instruct GPT shows significant improvements in providing more accurate information, writing high-quality texts, and answering complex questions.
 
+In natural language processing (NLP), the concepts of encoder and decoder are fundamental to understanding many modern architectures, especially those involved in tasks like machine translation, text summarization, and question answering. These components are central to the design of sequence-to-sequence (seq2seq) models, which are used to convert sequences from one domain (e.g., sentences in English) into sequences in another domain (e.g., sentences in French).
+
+#### Encoder & Decoder
+###### Encoder
+
+The encoder's role is to process the input sequence and compress all information into a context vector (or a set of vectors in more complex models like Transformers). This context vector aims to capture the essence of the input sequence's information, serving as a comprehensive representation for the decoder to generate the output.
+
+- **Functionality**: In a typical seq2seq model, the encoder processes the input sequence word by word (or token by token) and sequentially updates its internal state. In RNN-based architectures, this involves updating the hidden state at each timestep. The final state of the encoder after the last word of the input sequence has been processed is used as the context vector.
+- **Types of Encoders**:
+  - **RNN-based Encoders**: Utilize recurrent neural networks, LSTM (Long Short-Term Memory), or GRU (Gated Recurrent Units) to handle sequential data.
+  - **Transformer Encoders**: Use self-attention mechanisms to weigh the importance of different words in the input sequence relative to each other, capturing contextual relationships without the sequential processing limitations of RNNs.
+
+###### Decoder
+
+The decoder's task is to take the context vector produced by the encoder and generate the output sequence from it, one token at a time. The decoder learns to generate the output sequence by being trained on the target sequence, effectively learning to translate the context into a new domain.
+
+- **Functionality**: Starting with the context vector, the decoder generates the output sequence token by token. At each step, it considers the context vector (and possibly its previous outputs) to generate the next token. In RNN-based decoders, the generated token is fed back into the model as input for generating the next token.
+- **Types of Decoders**:
+  - **RNN-based Decoders**: Similar to RNN-based encoders but focused on generating the sequence rather than encoding it. They might also incorporate attention mechanisms to focus on different parts of the input sequence during each step of the generation.
+  - **Transformer Decoders**: Leverage self-attention and cross-attention mechanisms, where the latter allows the decoder to focus on different parts of the input sequence as it generates each token of the output sequence.
+
+###### Attention Mechanism
+An important enhancement to the encoder-decoder architecture is the attention mechanism, which allows the decoder to focus on different parts of the input sequence during the decoding process. This is particularly useful for longer sequences, where the context vector alone might not be sufficient to capture all the necessary information.
+- **How It Works**: The attention mechanism computes a set of attention weights that determine how much focus to put on each part of the input sequence when generating each token of the output sequence. This allows the model to dynamically attend to the most relevant parts of the input as needed, rather than relying solely on the fixed context vector.
+
 #### Scaling Model Sizes
 - **2019 to present**: With increased computational power and larger datasets, the size of language models continued to expand. Models like GPT-2 and GPT-3, with billions to hundreds of billions of parameters, further improved the quality and diversity of generated text.
 
