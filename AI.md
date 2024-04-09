@@ -1,5 +1,27 @@
 # AI Note
 
+## Natural Language Processing
+
+### overview of the development timeline of large language models
+#### Early Stages: Rule-based and Statistical Models
+- **1950s-1980s**: primarily rule-based. relied on expert systems and hardcoded linguistic rules to parse text, with limited effectiveness.
+- **1980s-1990s**: Statistical models, notably n-gram models. but still limited to relatively small datasets and simpler tasks.
+#### Neural Networks and Word Embeddings
+- **Early 2000s**: neural networks. moving away from reliance on manually designed features.
+- **2013**: Word2Vec marked the rise of word embedding techniques.
+#### Recurrent Neural Networks (RNN) and Long Short-Term Memory (LSTM)
+- **Early 2010s**: RNN and LSTMs, began to be widely used for processing sequential data, including text. These models were capable of capturing long-distance dependencies within sequences, though training them was still challenging due to issues like vanishing and exploding gradients.
+#### Attention Mechanism and Transformers
+- **2014**: Seq2Seq models and the attention mechanism greatly improved performance on tasks like machine translation and text generation. The attention mechanism allows models to "focus" on different parts of the input sequence while generating each word.
+- **2017**: "Attention is All You Need" introduced Transformer model, which relies entirely on attention mechanisms, abandoning traditional RNN architectures. The Transformer model's efficient parallel computation and superior performance laid the groundwork for subsequent large language models.
+#### Rise of Pre-trained Models: BERT and GPT
+- **2018**: BERT (Bidirectional Encoder Representations from Transformers). It can understand the context of a word in different uses, significantly improving performance on language understanding tasks.
+- **2018**: OpenAI released the GPT (Generative Pre-trained Transformer) model, utilizing the Transformer architecture for large-scale text data pre-training, followed by fine-tuning on specific tasks. The GPT model achieved breakthrough progress in various language generation tasks.
+#### Scaling Model Sizes
+- **2019 to present**: With increased computational power and larger datasets, the size of language models continued to expand. Models like GPT-2 and GPT-3, with billions to hundreds of billions of parameters, further improved the quality and diversity of generated text.
+
+
+
 ## Reinforcement Learning
 
 ### environment of RL
