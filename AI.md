@@ -149,7 +149,7 @@ BERT (Bidirectional Encoder Representations from Transformers) has inspired a mu
 
 In natural language processing (NLP), the concepts of encoder and decoder are fundamental to understanding many modern architectures, especially those involved in tasks like machine translation, text summarization, and question answering. These components are central to the design of sequence-to-sequence (seq2seq) models, which are used to convert sequences from one domain (e.g., sentences in English) into sequences in another domain (e.g., sentences in French).
 
-#### Encoder & Decoder
+##### Encoder & Decoder
 ###### Encoder
 
 The encoder's role is to process the input sequence and compress all information into a context vector (or a set of vectors in more complex models like Transformers). This context vector aims to capture the essence of the input sequence's information, serving as a comprehensive representation for the decoder to generate the output.
@@ -195,6 +195,9 @@ Following T5, several other large language models have been developed, each with
 - **Pre-training Techniques**: While BERT and its optimizations focus on understanding, GPT on generation, and BART combines aspects of both, T5's span corruption pre-training unifies these approaches under a single framework.
 - **Model Scalability and Efficiency**: The development of these models has also focused on making them scalable and efficient, with variations like DistilBERT, TinyBERT, and MiniLM aiming to maintain high performance with reduced model sizes for broader application.
 
+#### Scaling Model Sizes
+- **2019 to present**: With increased computational power and larger datasets, the size of language models continued to expand. Models like GPT-2 and GPT-3, with billions to hundreds of billions of parameters, further improved the quality and diversity of generated text.
+
 ##### LLM for intent recognition
 Intent recognition involves determining the purpose or goal behind a user's input, such as a query to a chatbot, voice assistant, or search engine. Accurately identifying user intent is crucial for providing relevant responses, recommendations, and services. 
 
@@ -229,9 +232,6 @@ Intent recognition involves determining the purpose or goal behind a user's inpu
 ###### Future Directions
 
 The field of intent recognition with LLMs is rapidly evolving, with ongoing research focusing on improving model interpretability, reducing computational requirements, and enhancing privacy preservation. Future advancements may include more sophisticated multimodal models that can interpret intent not just from text but also from voice intonation, images, or even video inputs.
-
-#### Scaling Model Sizes
-- **2019 to present**: With increased computational power and larger datasets, the size of language models continued to expand. Models like GPT-2 and GPT-3, with billions to hundreds of billions of parameters, further improved the quality and diversity of generated text.
 
 
 
@@ -323,6 +323,13 @@ $$\max\limits_\theta \Bbb{E}_{s\thicksim\nu^{\pi_{\theta_k}}}\Bbb{E}_{a\thicksim
 s.t.\ \Bbb{E}_{s\thicksim\nu^{\pi_{\theta_k}}}[D_{KL}(\pi_{\theta_k}(\cdot|s), \pi_\theta(\cdot|s))]\le\delta
 $$
 
+## Transfer Learning
+Deep transfer learning is about using the obtained knowledge from another task and
+dataset (even one not strongly related to the source task or dataset) to reduce learning
+costs.
+
+
+
 ## Fundamental
 
 ### Cross Validation
@@ -366,6 +373,7 @@ $$RMSE=SQRT(MSE)$$
 $$Percentage Error=\frac{True Value–Predicted Value}{True Value}\times100$$
 $$Coefficient\ of\ determination = R^2 = \frac{\sum_{i=1}^N(y_{t_i}-y_{p_i})^2}{\sum_{i=1}^{N}(y_{t_i}-y_{t_{mean}})}$$
 $$MCC=\frac{TP\times TN−FP\times FN}{\sqrt{(TP+FP)\times(FN+TN)\times(FP+TN)\times(TP+FN)}}$$
+
 ## references
 
 [动手学强化学习](https://hrl.boyuai.com/)
