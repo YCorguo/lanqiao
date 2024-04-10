@@ -323,11 +323,56 @@ $$\max\limits_\theta \Bbb{E}_{s\thicksim\nu^{\pi_{\theta_k}}}\Bbb{E}_{a\thicksim
 s.t.\ \Bbb{E}_{s\thicksim\nu^{\pi_{\theta_k}}}[D_{KL}(\pi_{\theta_k}(\cdot|s), \pi_\theta(\cdot|s))]\le\delta
 $$
 
-## Transfer Learning
+## Model Accelerator
+### Transfer Learning
 Deep transfer learning is about using the obtained knowledge from another task and
 dataset (even one not strongly related to the source task or dataset) to reduce learning
 costs.
 
+### Parameter-Efficient Fine-Tuning
+PEFT technology aims to improve the performance of pre trained models on new tasks by minimizing the number of fine-tuning parameters and computational complexity, thereby alleviating the training cost of large pre trained models.
+
+#### [Adapter Tuning](https://arxiv.org/pdf/1902.00751.pdf)
+Architecture of the adapter module and its integration with the Transformer are shown in the figure. **Left**: add the adapter module twice to each Transformer layer: after the projection following multiheaded attention and after the two feed-forward layers. **Right**: The adapter consists of a bottleneck which contains few parameters relative to the attention and feedforward layers in the original model. The adapter also contains a skip-connection. During adapter tuning, the green layers are trained on the downstream data, this includes the adapter, the layer normalization parameters, and the final classification layer (not shown in the figure).
+![alt text](image-2.png)
+
+#### [Prefix Tuning](https://aclanthology.org/2021.acl-long.353.pdf)
+As shown in the figure. Fine-tuning (top) updates all LM parameters (the red Transformer box) and requires storing a full model copy for each task. Prefixtuning (bottom) freezes the LM parameters and only optimizes the prefix (the red prefix blocks). Consequently, we only need to store the prefix for each
+task, making prefix-tuning modular and space-efficient. Note that each vertical block denote transformer activations at one time step.
+![alt text](image-3.png)
+An annotated example of prefix-tuning using an autoregressive LM (top) and an encoder-decoder model (bottom). The prefix activations $\forall i \isin P_{idx}$, $h_i$ are drawn from a trainable matrix $P_\theta$. The remaining activations are computed by the Transformer.
+![alt text](image-4.png)
+Prefix-tuning prepends a prefix for an autoregressive LM to obtain $z = [PREFIX; x; y]$, or prepends prefixes for both encoder and decoder to obtain $z = [PREFIX; x; PREFIX'
+; y]$, as shown in Figure 2.
+Here, $P_{idx}$ denotes the sequence of prefix indices, and we use $|P_{idx}|$ to denote the length of the prefix.
+We follow the recurrence relation in equation $$h_i=LM_{\phi}(z_i,h_{<i})$$, except that the activations of the prefix indices are free parameters, given by a matrix $P_θ$
+(parametrized by $θ$) of dimension $|P_{idx}| × dim(h_i)$. $$h_i=\left\{\begin{aligned}P_\theta[i,:], && if\ i \isin P_{idx}, \\LM_{\phi}(z_i,h_{<i}), && otherwise \\\end{aligned}\right.$$
+The training objective is the same as equation $$\max\limits_\phi \log p_\phi(y|x) = \max\limits_\phi \sum\limits_{i\isin Y_{idx}} \log p_\phi(z_i|h_{<i}).$$ but the set of trainable parameters changes: the language model parameters $\phi$ are fixed and the prefix parameters θ are the only trainable parameters.
+Here, each $h_i$ is a function of the trainable $P_θ$. When $i ∈ P_{idx}$, this is clear because hi copies directly from Pθ. When $i ∈ P_{idx}$, this is still depends on Pθ, because the prefix activations are always in the left context and will therefore affect any
+activations to the right.
+4.3 Parametrization of Pθ
+Empirically, directly updating the Pθ parameters
+leads to unstable optimization and a slight drop
+in performance.3 So we reparametrize the matrix
+Pθ[i, :] = MLPθ(P
+0
+θ
+[i, :]) by a smaller matrix (P
+0
+θ
+)
+composed with a large feedforward neural network
+(MLPθ). Now, the trainable parameters include P
+0
+θ
+and the parameters of MLPθ. Note that Pθ and
+P
+0
+θ
+has the same number of rows (i.e., the prefix
+length), but different number of columns.4
+Once training is complete, these reparametrization parameters can be dropped, and only the prefix
+(Pθ) needs to be saved.
 
 
 ## Fundamental
