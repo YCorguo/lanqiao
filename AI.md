@@ -172,8 +172,11 @@ The decoder's task is to take the context vector produced by the encoder and gen
 An important enhancement to the encoder-decoder architecture is the attention mechanism, which allows the decoder to focus on different parts of the input sequence during the decoding process. This is particularly useful for longer sequences, where the context vector alone might not be sufficient to capture all the necessary information.
 - **How It Works**: The attention mechanism computes a set of attention weights that determine how much focus to put on each part of the input sequence when generating each token of the output sequence. This allows the model to dynamically attend to the most relevant parts of the input as needed, rather than relying solely on the fixed context vector.
 
-##### T5
+##### [T5](https://www.jmlr.org/papers/volume21/20-074/20-074.pdf)
 The T5 (Text-to-Text Transfer Transformer) model, introduced by Google Research in 2019, represents a significant shift in natural language processing (NLP) by framing all NLP tasks as a unified text-to-text problem. This innovative approach enables T5 to handle a wide range of tasks with a single model architecture, from translation and summarization to question answering and classification, by simply changing the input format.
+
+![alt text](image-5.png)A diagram of text-to-text framework.
+![alt text](image-6.png)Schematics of the Transformer architecture variants we consider. In this diagram, blocks represent elements of a sequence and lines represent attention visibility. Different colored groups of blocks indicate different Transformer layer stacks. Dark grey lines correspond to fully-visible masking and light grey lines correspond to causal masking. We use “.” to denote a special end-of-sequence token that represents the end of a prediction. The input and output sequences are represented as x and y respectively. Left: A standard encoder-decoder architecture uses fully- visible masking in the encoder and the encoder-decoder attention, with causal masking in the decoder. Middle: A language model consists of a single Transformer layer stack and is fed the concatenation of the input and target, using a causal mask throughout. Right: Adding a prefix to a language model corresponds to allowing fully-visible masking over the input.
 
 ###### Key Features of T5
 - **Unified Task Framework**: T5 treats every NLP task as a text-to-text conversion, where both the input and output are sequences of text. This simplifies processing across diverse tasks.
