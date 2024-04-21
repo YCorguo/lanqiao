@@ -332,3 +332,99 @@ def f(n, a, x, y):
     return p[n]
 print(f"{f(n, a, x, y):.20f}")
 ```
+
+### F
+#### 题意
+给定一个带括号和大小写字母的字符串，拆解这些括号，规则是将括号内大写字母变小写，小写字母变大写，并reverse。
+#### 样例输入1
+```
+((A)y)x
+```
+#### 样例输出1
+```
+YAx
+```
+#### 样例输入2
+```
+((XYZ)n(X(y)Z))
+```
+#### 样例输出2
+```
+XYZNXYZ
+```
+#### 样例输入3
+```
+(((()))(()))(())
+```
+#### 样例输出3
+```
+```
+#### 样例输入4
+```
+dF(qT(plC())NnnfR(GsdccC))PO()KjsiI((ysA)eWW)ve
+```
+#### 样例输出3
+```
+dFGsdccCrFNNnplCtQPOKjsiIwwEysAve
+```
+#### 思路
+栈+双向遍历。
+#### c++代码
+```c++
+#include <bits/stdc++.h>
+std::string s;
+std::map<int, int> p;
+std::stack<int> st;
+void dfs(int l, int r, int d, int c)
+{
+    while (l != r) {
+        if (s[l] == '(' && d == 1) dfs(p[l] - 1, l, -1, c + 1), l = p[l] + 1;
+        else if (s[l] == ')' && d == -1) dfs(p[l] + 1, l, 1, c + 1), l = p[l] - 1;
+        else if ((c & 1) && s[l] >= 'a' && s[l] <= 'z') std::cout << (char)(s[l] - 'a' + 'A'), l += d;
+        else if ((c & 1) && s[l] >= 'A' && s[l] <= 'Z') std::cout << (char)(s[l] - 'A' + 'a'), l += d;
+        else std::cout << s[l], l += d;
+    }
+}
+int main()
+{
+    std::cin >> s;
+    for (int i = 0; i < s.size(); i ++)
+        if (s[i] == '(') st.push(i);
+        else if (s[i] == ')') p[st.top()] = i, p[i] = st.top(), st.pop();
+    dfs(0, s.size(), 1, 0);
+    return 0;
+}
+```
+#### python代码
+```python
+s = input()
+st = []
+p = {}
+for i in range(len(s)):
+    if s[i] == '(':
+        st.append(i)
+    elif s[i] == ')':
+        p[st[-1]] = i
+        p[i] = st.pop()
+stack = [(0, len(s), 1, 0)]
+while stack:
+    l, r, d, c = stack.pop()
+    while l != r:
+        if s[l] == '(' and d == 1:
+            stack.append((p[l] + 1, r, 1, c))
+            stack.append((p[l] - 1, l, -1, c + 1))
+            break
+        elif s[l] == ')' and d == -1:
+            stack.append((p[l] - 1, r, -1, c))
+            stack.append((p[l] + 1, l, 1, c + 1))
+            break
+        elif c & 1:
+            if s[l].isupper():
+                print(s[l].lower(), end='')
+            else:
+                print(s[l].upper(), end='')
+            l += d
+        else:
+            print(s[l], end='')
+            l += d
+```
