@@ -256,3 +256,79 @@ for i in range(n):
         res += num[i] * (num[i]-1) // 2
 print(res - m)
 ```
+
+### E
+#### 题意
+给定四个数N，A，X，Y，有2种操作：
+- 以X为代价让N变成\(\lfloor\frac{N}{A}\rfloor\)
+- 以Y为代价，掷一个骰子，均匀概率出现数字1-6，记为b，将N变成\(\lfloor\frac{N}{b}\rfloor\)。
+
+问以最佳方案下，使N变成0的最小数学期望是多少？
+#### 样例输入1
+```
+3 2 10 20
+```
+#### 样例输出1
+```
+20.000000000000000
+```
+#### 样例输入2
+```
+3 2 20 20
+```
+#### 样例输出2
+```
+32.000000000000000
+```
+#### 样例输入3
+```
+314159265358979323 4 223606797 173205080
+```
+#### 样例输出3
+```
+6418410657.7408381
+```
+#### 思路
+概率论。
+\[f(N)=\min(X+f(\lfloor\frac{N}{A}\rfloor), Y+\frac{1}{6}\sum\limits_{i=1}^{6}f(\lfloor\frac{N}{i}\rfloor))\\=\min(X+f(\lfloor\frac{N}{A}\rfloor), T)\]
+\[T=f(N)\\=Y+\frac{1}{6}\sum\limits_{i=1}^{6}f(\lfloor\frac{N}{i}\rfloor)\\=Y+\frac{T}{6}+\frac{f(\lfloor\frac{N}{2}\rfloor)}{6}+\frac{f(\lfloor\frac{N}{3}\rfloor)}{6}+\frac{f(\lfloor\frac{N}{4}\rfloor)}{6}+\frac{f(\lfloor\frac{N}{5}\rfloor)}{6}+\frac{f(\lfloor\frac{N}{6}\rfloor)}{6}\]
+\[5T=6Y+f(\lfloor\frac{N}{2}\rfloor)+f(\lfloor\frac{N}{3}\rfloor)+f(\lfloor\frac{N}{4}\rfloor)+f(\lfloor\frac{N}{5}\rfloor)+f(\lfloor\frac{N}{6}\rfloor)\]
+\[T=\frac{6Y+f(\lfloor\frac{N}{2}\rfloor)+f(\lfloor\frac{N}{3}\rfloor)+f(\lfloor\frac{N}{4}\rfloor)+f(\lfloor\frac{N}{5}\rfloor)+f(\lfloor\frac{N}{6}\rfloor)}{5}\]
+\[f(N)=\min(X+f(\lfloor\frac{N}{A}\rfloor), \frac{6Y+f(\lfloor\frac{N}{2}\rfloor)+f(\lfloor\frac{N}{3}\rfloor)+f(\lfloor\frac{N}{4}\rfloor)+f(\lfloor\frac{N}{5}\rfloor)+f(\lfloor\frac{N}{6}\rfloor)}{5})\]
+
+#### c++代码
+```c++
+#include <bits/stdc++.h>
+std::map<long long, long double> p;
+long long n, a, x, y;
+long double f(long long n)
+{
+    if (n == 0) return 0;
+    if (p.count(n)) return p[n];
+    long double res = x + f(n / a);
+    long double ans = y * 6;
+    for (int i = 2; i <= 6; i++)
+        ans += f(n / i);
+    ans /= 5;
+    return p[n] = std::min(res, ans);;
+}
+int main()
+{
+    std::cin >> n >> a >> x >> y;
+    std::cout << std::setprecision(20) << std::fixed << f(n);
+}
+```
+#### python代码
+```python
+n, a, x, y = map(int, input().split())
+p = {}
+def f(n, a, x, y):
+    if not n: return 0
+    if n in p: return p[n]
+    res = 6 * y
+    for i in range(2, 7):
+        res += f(n // i, a, x, y)
+    p[n] = min(x + f(n // a, a, x, y), res / 5)
+    return p[n]
+print(f"{f(n, a, x, y):.20f}")
+```
